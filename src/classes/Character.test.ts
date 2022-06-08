@@ -30,17 +30,16 @@ describe('Iteration one', ()=>{
 
     it('Character Healing', ()=>{
         const healingCharacter = new Character();
-        const healedCharacter = new Character();
 
-        healingCharacter.heal(healedCharacter);
+        healingCharacter.heal(healingCharacter);
 
-        expect(healedCharacter.healthPoint).toEqual(20);
+        expect(healingCharacter.healthPoint).toEqual(20);
 
         for(let i = 0; i < 100; i++){
-            healingCharacter.heal(healedCharacter);
+            healingCharacter.heal(healingCharacter);
         }
 
-        expect(healedCharacter.healthPoint).toBe(1000);
+        expect(healingCharacter.healthPoint).toBe(1000);
     });
 });
 
@@ -53,4 +52,13 @@ describe('Iteration 2', ()=>{
         charDealsDamage.attack(charReceiveDamage);
         expect(()=> charReceiveDamage.healthPoint).not.toThrow();
     });
+
+    it('Characters just can heal himself', ()=>{
+        const healingCharacter = new Character();
+        const healedCharacter = new Character();
+
+        expect(()=> healingCharacter.heal(healedCharacter)).toThrow();
+
+        expect(()=> healingCharacter.heal(healingCharacter)).not.toThrow();
+    })
 })

@@ -24,6 +24,7 @@ export default class Character {
     }
 
     public heal = (characterReceiveHeal: Character) => {
+        if(characterReceiveHeal !== this) throw new Error(`Just can heal yourself`);
         characterReceiveHeal.receiveHeal(this.healingPoint);
     }
 
