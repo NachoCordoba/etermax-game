@@ -27,4 +27,19 @@ describe('Iteration one', ()=>{
         expect(charReceiveDamage.healthPoint).toEqual(0);
         expect(charReceiveDamage.isAlive).toBeFalsy();
     });
+
+    it('Character Healing', ()=>{
+        const healingCharacter = new Character();
+        const healedCharacter = new Character();
+
+        healingCharacter.heal(healedCharacter);
+
+        expect(healedCharacter.healthPoint).toEqual(20);
+
+        for(let i = 0; i < 100; i++){
+            healingCharacter.heal(healedCharacter);
+        }
+
+        expect(healedCharacter.healthPoint).toBe(1000);
+    });
 })
