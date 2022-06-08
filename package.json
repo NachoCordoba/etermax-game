@@ -1,0 +1,19 @@
+{
+  "name": "etermax-game",
+  "version": "1.0.0",
+  "description": "Challenge Etermax",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist",
+    "dev": "tsc-watch --onSuccess \"npm run start\"",
+    "test": "jest"
+  },
+  "author": "Ignacio A. Cordoba",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "jest": "^28.1.1",
+    "ts-jest": "^28.0.4",
+    "tsc-watch": "^5.0.3"
+  }
+}
