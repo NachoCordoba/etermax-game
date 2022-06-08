@@ -16,7 +16,10 @@ export default class Character {
 
     public attack = (characterReceiveDamage: Character): void => {
         if(characterReceiveDamage === this) throw new Error(`Can't deal damage yourself`);
-        characterReceiveDamage.receiveDamage(this.damagePoint);
+        let damage = this.damagePoint;
+
+        if(characterReceiveDamage.level >= 5) damage = damage * 0.5;
+        characterReceiveDamage.receiveDamage(damage);
     }
 
     public receiveDamage = (damage: number): void => {
