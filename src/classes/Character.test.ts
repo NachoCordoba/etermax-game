@@ -42,4 +42,15 @@ describe('Iteration one', ()=>{
 
         expect(healedCharacter.healthPoint).toBe(1000);
     });
+});
+
+describe('Iteration 2', ()=>{
+    it('Character can deal damage to enemies, but no to himself', ()=>{
+        const charDealsDamage = new Character();
+        expect(()=> charDealsDamage.attack(charDealsDamage)).toThrow();
+
+        const charReceiveDamage = new Character();
+        charDealsDamage.attack(charReceiveDamage);
+        expect(()=> charReceiveDamage.healthPoint).not.toThrow();
+    });
 })

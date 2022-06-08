@@ -15,6 +15,7 @@ export default class Character {
     }
 
     public attack = (characterReceiveDamage: Character): void => {
+        if(characterReceiveDamage === this) throw new Error(`Can't deal damage yourself`);
         characterReceiveDamage.receiveDamage(this.damagePoint);
     }
 
