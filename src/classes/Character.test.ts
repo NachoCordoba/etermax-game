@@ -62,7 +62,7 @@ describe('Iteration 2', ()=>{
         expect(()=> healingCharacter.heal(healingCharacter)).not.toThrow();
     })
 
-    it('If the target is 5 or more levels, damage is reduced by 50%', () => {
+    it('If the target is 5 or more above levels, damage is reduced by 50%', () => {
         const charDealsDamage = new Character();
         const charReceiveDamage = new Character();
         charReceiveDamage.level = 6;
