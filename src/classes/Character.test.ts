@@ -12,4 +12,19 @@ describe('Iteration one', ()=>{
         expect(character.isAlive).toEqual(INITIAL_ALIVE);
         expect(character.level).toEqual(INITIAL_LEVEL);
     });
+
+    it('Character Deal Damage', ()=>{
+        const charDealsDamage = new Character();
+        const charReceiveDamage = new Character();
+
+        charDealsDamage.attack(charReceiveDamage);
+
+        expect(charReceiveDamage.healthPoint).toEqual(5);
+
+        charDealsDamage.attack(charReceiveDamage);
+        charDealsDamage.attack(charReceiveDamage);
+
+        expect(charReceiveDamage.healthPoint).toEqual(0);
+        expect(charReceiveDamage.isAlive).toBeFalsy();
+    });
 })
