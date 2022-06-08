@@ -1,15 +1,16 @@
+import { INITIAL_ALIVE, INITIAL_HEALTHPOINT, INITIAL_LEVEL } from "../config/constants";
 export default class Character {
-    private _healthPoint : number;
-    private _level : number;
-    private _isAlive : boolean;
+    private _healthPoint: number;
+    private _level: number;
+    private _isAlive: boolean;
 
     constructor(){
-        this._healthPoint = 10;
-        this._level = 1;
-        this._isAlive = true;
+        this._healthPoint = INITIAL_HEALTHPOINT;
+        this._level = INITIAL_LEVEL;
+        this._isAlive = INITIAL_ALIVE;
     }
 
-    get healthPoint(){
+    get healthPoint(): number {
         return this._healthPoint;
     }
 
@@ -17,7 +18,7 @@ export default class Character {
         this._healthPoint = healthPoint;
     }
 
-    get level(){
+    get level(): number {
         return this._level;
     }
 
@@ -25,7 +26,7 @@ export default class Character {
         this._level = level;
     }
 
-    get isAlive(){
+    get isAlive(): boolean {
         return this._isAlive;
     }
 
