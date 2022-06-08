@@ -18,7 +18,7 @@ export default class Character {
         if(characterReceiveDamage === this) throw new Error(`Can't deal damage yourself`);
         let damage = this.damagePoint;
 
-        if(characterReceiveDamage.level >= 5) damage = damage * 0.5;
+        if((characterReceiveDamage.level - this.level) >= 5) damage = damage * 0.5;
         characterReceiveDamage.receiveDamage(damage);
     }
 
