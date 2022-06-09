@@ -33,6 +33,7 @@ export default abstract class Character {
     }
 
     private isFromSameFaction = (fromCharacter: Character): boolean => {
+        if(fromCharacter === this) return true;
         return this.factions.filter( faction => fromCharacter.factions.indexOf(faction) != -1).length > 0;
     }
 
@@ -55,7 +56,7 @@ export default abstract class Character {
     }
 
     public heal = (characterReceiveHeal: Character) => {
-        if(characterReceiveHeal !== this) throw new Error(`Just can heal yourself`);
+        if(!this.isFromSameFaction(characterReceiveHeal)) throw new Error(`Just can heal yourself and your faction alliades`);
         characterReceiveHeal.receiveHeal(this.healingPoint);
     }
 

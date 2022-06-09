@@ -195,4 +195,30 @@ describe('Iteration four', ()=>{
         expect(characterTwo.isAlive).toBeFalsy();
         expect(()=> otherCharacterOne.attack(characterOne)).not.toThrow();
     });
+
+    it('Allies heal to one another, but not the enemy', ()=>{
+        const characterOne = new GenericCharacter();
+        const otherCharacterOne = new GenericCharacter();
+        const characterTwo = new GenericCharacter();
+        const factionOne = new Faction({ id: 1, name: 'Faction One' });
+        const factionTwo = new Faction({ id: 2, name: 'Faction Two' });
+
+        characterOne.joinFaction(factionOne);
+        otherCharacterOne.joinFaction(factionOne);
+
+        characterTwo.joinFaction(factionTwo);
+
+        expect(()=> characterOne.heal(otherCharacterOne)).not.toThrow();
+        expect(()=> otherCharacterOne.heal(characterOne)).not.toThrow();       
+
+        expect(()=> characterOne.heal(characterTwo)).toThrow();
+
+        characterTwo.joinFaction(factionOne);
+        expect(()=> characterOne.heal(characterTwo)).not.toThrow();
+        expect(characterTwo.healthPoint).toBe(20);
+
+        otherCharacterOne.leaveFaction(factionOne.id);
+        expect(()=> otherCharacterOne.heal(characterTwo)).toThrow();
+        expect(()=> otherCharacterOne.heal(characterOne)).toThrow();
+    });
 });
