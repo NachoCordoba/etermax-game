@@ -1,4 +1,4 @@
-import { INITIAL_MELE_FIGHTER_RANGE } from "../config/constants";
+import { INITIAL_MELE_FIGHTER_RANGE } from "../../config/constants";
 import Character from "./Character"
 
 export default class MeleFighter extends Character{
