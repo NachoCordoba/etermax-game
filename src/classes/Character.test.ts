@@ -71,5 +71,17 @@ describe('Iteration 2', ()=>{
         charReceiveDamage.level = 50;
         charDealsDamage.attack(charReceiveDamage);
         expect(charReceiveDamage.healthPoint).toBe(5);
-    })
+    });
+
+    it('If the target is 5 or more below levels, damage is reduced by 50%', () => {
+        const charDealsDamage = new Character();
+        const charReceiveDamage = new Character();
+        charDealsDamage.level = 6;
+        charDealsDamage.attack(charReceiveDamage);
+        expect(charReceiveDamage.healthPoint).toBe(2.5);
+        charDealsDamage.level = 50;
+        charDealsDamage.attack(charReceiveDamage);
+        expect(charReceiveDamage.healthPoint).toBe(0);
+        expect(charReceiveDamage.isAlive).toBeFalsy();
+    });
 })
