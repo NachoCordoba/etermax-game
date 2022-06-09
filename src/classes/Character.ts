@@ -1,17 +1,25 @@
-import { INITIAL_ALIVE, INITIAL_DAMAGEPOINT, INITIAL_HEALINGPOINT, INITIAL_HEALTHPOINT, INITIAL_LEVEL, MAX_HEALTHPOINT } from "../config/constants";
-export default class Character {
+import { INITIAL_ALIVE, INITIAL_DAMAGEPOINT, INITIAL_HEALINGPOINT, INITIAL_HEALTHPOINT, INITIAL_LEVEL, INITIAL_POSITION_X, INITIAL_POSITION_Z, MAX_HEALTHPOINT } from "../config/constants";
+export default abstract class Character {
     private _healthPoint: number;
     private _level: number;
     private _isAlive: boolean;
     private _damagePoint: number;
     private _healingPoint: number;
+    private _attackDistance: number;
 
-    constructor(){
+    private _positionX: number;
+    private _positionZ: number;
+
+    constructor({ attackDistance }: { attackDistance : number }){
         this._healthPoint = INITIAL_HEALTHPOINT;
         this._level = INITIAL_LEVEL;
         this._isAlive = INITIAL_ALIVE;
         this._damagePoint = INITIAL_DAMAGEPOINT;
         this._healingPoint = INITIAL_HEALINGPOINT;
+        this._attackDistance = attackDistance;
+
+        this._positionX = INITIAL_POSITION_X;
+        this._positionZ = INITIAL_POSITION_Z;
     }
 
     public attack = (characterReceiveDamage: Character): void => {
@@ -83,5 +91,29 @@ export default class Character {
 
     set healingPoint(heal: number){
         this._healingPoint = heal;
+    }
+
+    get attackDistance(): number {
+        return this._attackDistance;
+    }
+
+    set attackDistance(attackDistance: number){
+        this._attackDistance = attackDistance;
+    }
+
+    get positionX(): number {
+        return this._positionX;
+    }
+
+    set positionX(positionX: number){
+        this._positionX = positionX;
+    }
+
+    get positionZ(): number {
+        return this._positionZ;
+    }
+
+    set positionZ(positionZ: number){
+        this._positionZ = positionZ;
     }
 }

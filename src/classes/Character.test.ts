@@ -1,12 +1,18 @@
 import Character from "./Character";
 
+class GenericCharacter extends Character {
+    constructor(attackDistance = 1){
+        super({ attackDistance });
+    }
+}
+
 const INITIAL_HEALTHPOINT = 10;
 const INITIAL_ALIVE = true;
 const INITIAL_LEVEL = 1;
 
 describe('Iteration one', ()=>{
     it('Character Creation', ()=>{
-        const character = new Character();
+        const character = new GenericCharacter();
 
         expect(character.healthPoint).toEqual(INITIAL_HEALTHPOINT);
         expect(character.isAlive).toEqual(INITIAL_ALIVE);
@@ -14,8 +20,8 @@ describe('Iteration one', ()=>{
     });
 
     it('Character Deal Damage', ()=>{
-        const charDealsDamage = new Character();
-        const charReceiveDamage = new Character();
+        const charDealsDamage = new GenericCharacter();
+        const charReceiveDamage = new GenericCharacter();
 
         charDealsDamage.attack(charReceiveDamage);
 
@@ -29,7 +35,7 @@ describe('Iteration one', ()=>{
     });
 
     it('Character Healing', ()=>{
-        const healingCharacter = new Character();
+        const healingCharacter = new GenericCharacter();
 
         healingCharacter.heal(healingCharacter);
 
@@ -43,19 +49,19 @@ describe('Iteration one', ()=>{
     });
 });
 
-describe('Iteration 2', ()=>{
+describe('Iteration two', ()=>{
     it('Character can deal damage to enemies, but no to himself', ()=>{
-        const charDealsDamage = new Character();
+        const charDealsDamage = new GenericCharacter();
         expect(()=> charDealsDamage.attack(charDealsDamage)).toThrow();
 
-        const charReceiveDamage = new Character();
+        const charReceiveDamage = new GenericCharacter();
         charDealsDamage.attack(charReceiveDamage);
         expect(()=> charReceiveDamage.healthPoint).not.toThrow();
     });
 
     it('Characters just can heal himself', ()=>{
-        const healingCharacter = new Character();
-        const healedCharacter = new Character();
+        const healingCharacter = new GenericCharacter();
+        const healedCharacter = new GenericCharacter();
 
         expect(()=> healingCharacter.heal(healedCharacter)).toThrow();
 
@@ -63,8 +69,8 @@ describe('Iteration 2', ()=>{
     })
 
     it('If the target is 5 or more above levels, damage is reduced by 50%', () => {
-        const charDealsDamage = new Character();
-        const charReceiveDamage = new Character();
+        const charDealsDamage = new GenericCharacter();
+        const charReceiveDamage = new GenericCharacter();
         charReceiveDamage.level = 6;
         charDealsDamage.attack(charReceiveDamage);
         expect(charReceiveDamage.healthPoint).toBe(7.5);
@@ -74,8 +80,8 @@ describe('Iteration 2', ()=>{
     });
 
     it('If the target is 5 or more below levels, damage is reduced by 50%', () => {
-        const charDealsDamage = new Character();
-        const charReceiveDamage = new Character();
+        const charDealsDamage = new GenericCharacter();
+        const charReceiveDamage = new GenericCharacter();
         charDealsDamage.level = 6;
         charDealsDamage.attack(charReceiveDamage);
         expect(charReceiveDamage.healthPoint).toBe(2.5);
@@ -83,5 +89,12 @@ describe('Iteration 2', ()=>{
         charDealsDamage.attack(charReceiveDamage);
         expect(charReceiveDamage.healthPoint).toBe(0);
         expect(charReceiveDamage.isAlive).toBeFalsy();
+    });
+});
+
+describe('Iteration three', ()=>{
+    it('Character has an attack range', ()=>{
+        const character = new GenericCharacter(10);
+        expect(character.attackDistance).toBe(10);
     });
 })

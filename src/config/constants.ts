@@ -4,3 +4,5 @@ export const INITIAL_ALIVE = true;
 export const INITIAL_DAMAGEPOINT = 5;
 export const INITIAL_HEALINGPOINT = 10;
 export const MAX_HEALTHPOINT = 1000;
+export const INITIAL_POSITION_X = 0;
+export const INITIAL_POSITION_Z = 0;
