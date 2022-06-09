@@ -1,4 +1,5 @@
 import Character from "./Character";
+import MeleFighter from "./MeleFighter";
 
 class GenericCharacter extends Character {
     constructor(attackDistance = 1){
@@ -96,5 +97,10 @@ describe('Iteration three', ()=>{
     it('Character has an attack range', ()=>{
         const character = new GenericCharacter(10);
         expect(character.attackDistance).toBe(10);
+    });
+
+    it('Mele Fighters have a range of 2 meters', ()=>{
+        const meleFigther = new MeleFighter();
+        expect(meleFigther.attackDistance).toBe(2);
     });
 })
