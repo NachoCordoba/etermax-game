@@ -1,4 +1,5 @@
 import { INITIAL_ALIVE, INITIAL_DAMAGEPOINT, INITIAL_HEALINGPOINT, INITIAL_HEALTHPOINT, INITIAL_LEVEL, INITIAL_POSITION_X, INITIAL_POSITION_Z, MAX_HEALTHPOINT } from "../../config/constants";
+import Faction from "../Factions/Faction";
 export default abstract class Character {
     private _healthPoint: number;
     private _level: number;
@@ -6,6 +7,7 @@ export default abstract class Character {
     private _damagePoint: number;
     private _healingPoint: number;
     private _attackDistance: number;
+    private _factions: Array<Faction>
 
     private _positionX: number;
     private _positionZ: number;
@@ -20,6 +22,7 @@ export default abstract class Character {
 
         this._positionX = INITIAL_POSITION_X;
         this._positionZ = INITIAL_POSITION_Z;
+        this._factions = new Array<Faction>();
     }
 
     private calculateDistance = (fromCharacter: Character): number => {
@@ -54,6 +57,10 @@ export default abstract class Character {
     public receiveHeal = (heal: number): void => {
         if(heal + this.healthPoint > MAX_HEALTHPOINT) heal = MAX_HEALTHPOINT - this.healthPoint;
         this.healthPoint = this.healthPoint + heal;
+    }
+
+    public joinFaction = (faction: Faction): void => {
+        this._factions.push(faction);
     }
 
     get healthPoint(): number {
@@ -123,5 +130,13 @@ export default abstract class Character {
 
     set positionZ(positionZ: number){
         this._positionZ = positionZ;
+    }
+
+    get factions(): Array<Faction> {
+        return this._factions;
+    }
+
+    set factions(factions: Array<Faction>){
+        this._factions = factions;
     }
 }

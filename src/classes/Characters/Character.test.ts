@@ -1,3 +1,4 @@
+import Faction from "../Factions/Faction";
 import Character from "./Character";
 import MeleFighter from "./MeleFighter";
 import RangedFighter from "./RangedFighter";
@@ -142,5 +143,21 @@ describe('Iteration three', ()=>{
 
         expect(rangedFighter.healthPoint).toBe(0);
         expect(rangedFighter.isAlive).toBeFalsy();
-    })
-})
+    });
+});
+
+describe('Iteration four', ()=>{
+    it('Characters may belong to one or more factions. Newly created characters belong to no faction', ()=>{
+        const character = new GenericCharacter();
+        const factionOne = new Faction({ id: 1, name: 'Faction One' });
+        const factionTwo = new Faction({ id: 2, name: 'Faction Two' });
+        
+        expect(character.factions.length).toBe(0);
+
+        character.joinFaction(factionOne);
+        expect(character.factions).toEqual([factionOne]);
+
+        character.joinFaction(factionTwo);
+        expect(character.factions).toEqual([factionOne, factionTwo]);
+    });
+});
