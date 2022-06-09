@@ -20,6 +20,7 @@ export default class Character {
         const levelDif = this.level - characterReceiveDamage.level;
         console.log(this.level, ' ', characterReceiveDamage.level, ' ', levelDif);
         if(levelDif <= -5) damage = damage * 0.5;
+        if(levelDif >= 5) damage = damage * 1.5;
         characterReceiveDamage.receiveDamage(damage);
     }
 
