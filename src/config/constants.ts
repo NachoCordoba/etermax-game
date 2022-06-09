@@ -8,3 +8,4 @@ export const INITIAL_POSITION_X = 0;
 export const INITIAL_POSITION_Z = 0;
 
 export const INITIAL_MELE_FIGHTER_RANGE = 2;
+export const INITIAL_RANGED_FIGHTER_RANGE = 20;
