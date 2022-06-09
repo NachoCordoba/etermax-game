@@ -167,5 +167,32 @@ describe('Iteration four', ()=>{
         expect(character.factions).toEqual([factionTwo]);
         character.leaveFaction(factionTwo.id);
         expect(character.factions).toEqual([]);
-    })
+    });
+
+    it('Allies cannot deal damage to one another', ()=>{
+        const characterOne = new GenericCharacter();
+        const otherCharacterOne = new GenericCharacter();
+        const characterTwo = new GenericCharacter();
+        const factionOne = new Faction({ id: 1, name: 'Faction One' });
+        const factionTwo = new Faction({ id: 2, name: 'Faction Two' });
+
+        characterOne.joinFaction(factionOne);
+        otherCharacterOne.joinFaction(factionOne);
+
+        characterTwo.joinFaction(factionTwo);
+
+        expect(()=> characterOne.attack(otherCharacterOne)).toThrow();
+        expect(()=> otherCharacterOne.attack(characterOne)).toThrow();       
+
+        expect(()=> characterOne.attack(characterTwo)).not.toThrow();
+        expect(characterTwo.healthPoint).toBe(5);
+
+        characterTwo.joinFaction(factionOne);
+        expect(()=> characterOne.attack(characterTwo)).toThrow();
+
+        otherCharacterOne.leaveFaction(factionOne.id);
+        expect(()=> otherCharacterOne.attack(characterTwo)).not.toThrow();
+        expect(characterTwo.isAlive).toBeFalsy();
+        expect(()=> otherCharacterOne.attack(characterOne)).not.toThrow();
+    });
 });

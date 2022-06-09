@@ -32,9 +32,14 @@ export default abstract class Character {
         return hypotenuse;
     }
 
+    private isFromSameFaction = (fromCharacter: Character): boolean => {
+        return this.factions.filter( faction => fromCharacter.factions.indexOf(faction) != -1).length > 0;
+    }
+
     public attack = (characterReceiveDamage: Character): void => {
         if(characterReceiveDamage === this) throw new Error(`Can't deal damage yourself`);
-        if(this.calculateDistance(characterReceiveDamage) > this.attackDistance) throw new Error('Target out of range');
+        if(this.isFromSameFaction(characterReceiveDamage)) throw new Error(`U're from the same faction`);
+        if(this.calculateDistance(characterReceiveDamage) > this.attackDistance) throw new Error(`Target out of range`);
 
         let damage = this.damagePoint;
         const levelDif = this.level - characterReceiveDamage.level;
