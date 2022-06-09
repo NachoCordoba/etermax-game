@@ -60,7 +60,11 @@ export default abstract class Character {
     }
 
     public joinFaction = (faction: Faction): void => {
-        this._factions.push(faction);
+        this.factions.push(faction);
+    }
+
+    public leaveFaction = (id: number): void => {
+        this.factions = this.factions.filter(faction => faction.id !== id);
     }
 
     get healthPoint(): number {

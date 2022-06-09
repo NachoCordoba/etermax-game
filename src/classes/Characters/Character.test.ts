@@ -149,15 +149,23 @@ describe('Iteration three', ()=>{
 describe('Iteration four', ()=>{
     it('Characters may belong to one or more factions. Newly created characters belong to no faction', ()=>{
         const character = new GenericCharacter();
+        expect(character.factions.length).toBe(0);        
+    });
+
+    it('A character may join or leave one or more factions', ()=>{
+        const character = new GenericCharacter();
         const factionOne = new Faction({ id: 1, name: 'Faction One' });
         const factionTwo = new Faction({ id: 2, name: 'Faction Two' });
-        
-        expect(character.factions.length).toBe(0);
 
         character.joinFaction(factionOne);
         expect(character.factions).toEqual([factionOne]);
 
         character.joinFaction(factionTwo);
         expect(character.factions).toEqual([factionOne, factionTwo]);
-    });
+
+        character.leaveFaction(factionOne.id);
+        expect(character.factions).toEqual([factionTwo]);
+        character.leaveFaction(factionTwo.id);
+        expect(character.factions).toEqual([]);
+    })
 });
