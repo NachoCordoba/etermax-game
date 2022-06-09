@@ -109,4 +109,38 @@ describe('Iteration three', ()=>{
         const rangedFighter = new RangedFighter();
         expect(rangedFighter.attackDistance).toBe(20);
     })
+
+    it('To deal damage, the player must be in range',()=>{
+        const meleFighter = new MeleFighter();
+        meleFighter.level = 5;
+        const rangedFighter = new RangedFighter();
+
+        rangedFighter.positionX = 20;
+        rangedFighter.positionZ = 20;
+
+        expect(()=> meleFighter.attack(rangedFighter)).toThrow();
+        expect(()=> rangedFighter.attack(meleFighter)).toThrow();
+
+        rangedFighter.positionX = 10;
+        rangedFighter.positionZ = 15;
+        expect(()=> meleFighter.attack(rangedFighter)).toThrow();
+        expect(()=> rangedFighter.attack(meleFighter)).not.toThrow();
+        expect(meleFighter.healthPoint).toBe(5);
+
+        meleFighter.level = 6;
+        meleFighter.positionX = 9;
+        meleFighter.positionZ = 13;
+
+        expect(()=> meleFighter.attack(rangedFighter)).toThrow();
+        expect(()=> rangedFighter.attack(meleFighter)).not.toThrow();
+        expect(meleFighter.healthPoint).toBe(2.5);
+
+        meleFighter.positionX = 10;
+        meleFighter.positionZ = 14;
+        expect(()=> meleFighter.attack(rangedFighter)).not.toThrow();
+        expect(()=> meleFighter.attack(rangedFighter)).not.toThrow();
+
+        expect(rangedFighter.healthPoint).toBe(0);
+        expect(rangedFighter.isAlive).toBeFalsy();
+    })
 })

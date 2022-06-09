@@ -22,8 +22,16 @@ export default abstract class Character {
         this._positionZ = INITIAL_POSITION_Z;
     }
 
+    private calculateDistance = (fromCharacter: Character): number => {
+        const hickA = this.positionZ - fromCharacter.positionZ;
+        const hickB = this.positionX - fromCharacter.positionX;
+        const hypotenuse = Math.sqrt((Math.pow(hickA, 2) + Math.pow(hickB, 2)));
+        return hypotenuse;
+    }
+
     public attack = (characterReceiveDamage: Character): void => {
         if(characterReceiveDamage === this) throw new Error(`Can't deal damage yourself`);
+        if(this.calculateDistance(characterReceiveDamage) > this.attackDistance) throw new Error('Target out of range');
 
         let damage = this.damagePoint;
         const levelDif = this.level - characterReceiveDamage.level;
