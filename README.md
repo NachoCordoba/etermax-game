@@ -1,3 +1,11 @@
 # Etermax Game
+## Challenge Etermax
+### Typescript
 
-Challenge Etermax
+### npm run start
+
+Compila y corre la aplicacion.
+
+### npm run test
+
+Corre las pruebas unitarias.
